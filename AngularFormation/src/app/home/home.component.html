@@ -1,0 +1,89 @@
+<div class="row">
+    <div class="col-md-8 mt-4 mx-auto">
+        <div class="card">
+          <div class="card-body">
+       <!-- cart info -->
+        <div class="d-flex mb-2 justify-content-between align-content-center">
+          <div>
+            <h3 class="card-title">Contacts {{Date | date:"longDate"}}</h3>
+          </div>
+            <form class="d-flex flex-row my-2 mb-2 my-lg-0">
+                <input [(ngModel)]="searchTerm" class="form-control mr-sm-2" type="text" name="search" placeholder="Recherche par nom">
+                <button (click)="findContacts()" class="btn btn-success  mx-2 my-sm-0"><i
+                  class="fa fa-search"></i></button>        
+            </form>
+        </div>
+            <p class="card-text"></p>
+              <table class="table text-dark">
+                <thead class="bg-dark text-white">
+                  <tr>
+                    <th>Nom</th>
+                    <th>Prénom</th>
+                    <th>Téléphone</th>
+                    <th>status</th>
+                    <th>Etat</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let contact of Contacts;let i = index">
+                    <td>{{contact.nom}}</td>
+                    <td>{{contact.prenom}}</td>
+                    <td>{{contact.tel}}</td>
+                    <!-- IF/ELSE CONDITION -->
+                    <!-- <td *ngIf="contact.status == 'active'">active</td> -->
+                    
+                    <td *ngIf="contact.status == 'active';else inactive">active</td>
+                    <ng-template #inactive><td>en attente</td></ng-template>
+                    <!-- SWITCH CASE -->
+                    <td [ngSwitch]="contact.etat">
+                      <span *ngSwitchCase="'disponible'" class="badge bg-success p-2">disponible</span>
+                      <span *ngSwitchCase="'occuper'" class="badge bg-danger p-2">occuper</span>
+                      <span *ngSwitchDefault class="badge bg-warning p-2">information non disponible</span>
+                    </td>
+                    <!-- Event -->
+                    <td>
+                      <button class="btn btn-sm btn-warning mr-1"  data-bs-toggle="modal" data-bs-target="#editContact"
+                        (click)="editContact(i)"><i class="fa fa-edit"></i></button>
+                       <button class="btn btn-sm btn-danger mx-2" data-toggle="modal" (click)="confirmDelete(i)"
+                        data-target="#deleteContact"><i class=" fa fa-trash"></i></button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+          </div>
+        </div>
+    </div>
+  </div>
+<!-- Edit Modal -->
+<form method="post">
+<div class="modal fade" id="editContact" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modifier Contact</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <div class="form-group"><input required class="form-control" [(ngModel)]="ContactToEdit.nom" type="text"
+              placeholder="Nom" name="nom" id="nom"></div>
+          <div class="form-group my-2"><input required class="form-control" type="text" placeholder="Prénom" name="prenom"
+              [(ngModel)]="ContactToEdit.prenom" id="prenom"></div>
+          <div class="form-group"><input required class="form-control" type="tel" placeholder="Téléphone" name="tel"
+              [(ngModel)]="ContactToEdit.tel" id="tel">
+          </div>
+          <div class="form-group my-2"><input required class="form-control" type="text" placeholder="status" name="status"
+            [(ngModel)]="ContactToEdit.status" id="status">
+          </div>
+          <div class="form-group"><input required class="form-control" type="text" placeholder="etat" name="etat"
+            [(ngModel)]="ContactToEdit.etat" id="etat">
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+        <button type="button" (click)="updateContact()" data-bs-dismiss="modal" required class="form-control" class="btn btn-primary">Valider</button>
+      </div>
+    </div>
+  </div>
+</div>
+</form>

@@ -1,0 +1,36 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Angular Contacts App</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" [routerLink]="['home']"
+          routerLinkActive="router-link-active"><i class="fa fa-home"></i>Acceuil</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="add" *ngIf="logged"><i class="fa fa-plus"></i>Ajouter</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link"  *ngIf="logged"><i class=""></i>{{existingUser.email}}</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link"  style="cursor: pointer;"
+          (click)="logout()"
+          *ngIf="logged"><i class="fa fa-sign-out"></i>Déconnexion</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="login" *ngIf="!logged"><i class="fa fa-sign-in"></i>Connexion</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="auth" *ngIf="!logged"><i class="fa fa-registered"></i>Inscription</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="container-fluid">
+  <router-outlet></router-outlet>
+</div>

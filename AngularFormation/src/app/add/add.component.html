@@ -1,0 +1,32 @@
+<div class="row mt-4">
+    <div class="col-md-6 mx-auto">
+       <div class="card">
+         <div class="card-body">
+           <h3 class="card-title">Nouveau contact</h3>
+           <form method="post">
+              <div class="form-group">
+                  <input required class="form-control"
+                  [(ngModel)]="newContact.nom" type="text" placeholder="Nom" name="nom" id="nom">
+              </div>
+              <div class="form-group my-3">
+                  <input required class="form-control" type="text" placeholder="Prénom" name="prenom"
+                  [(ngModel)]="newContact.prenom" id="prenom">
+              </div>
+              <div class="form-group">
+                  <input required class="form-control" type="tel" placeholder="Téléphone" name="tel"
+                   [(ngModel)]="newContact.tel" id="tel">
+              </div>
+              <div class="form-group my-3">
+                <input required class="form-control" type="text" placeholder="status" name="status"
+                 [(ngModel)]="newContact.status" id="status">
+              </div>
+              <div class="form-group">
+              <input required class="form-control" type="text" placeholder="etat" name="etat"
+               [(ngModel)]="newContact.etat" id="etat">
+              </div>
+              <div class="form-group mt-2"><button (click)="saveContact()" required class="form-control" class="btn btn-primary">valider</button></div>
+           </form>
+         </div>
+       </div>
+    </div>
+  </div>
